@@ -1,0 +1,299 @@
+!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400&display=swap');
+ 
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+ 
+  body {
+    background: #1a0a2e;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Lato', sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+ 
+  .stars {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+ 
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--d) ease-in-out infinite alternate;
+  }
+ 
+  @keyframes twinkle {
+    from { opacity: 0.1; transform: scale(1); }
+    to { opacity: 0.9; transform: scale(1.3); }
+  }
+ 
+  .container {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 2rem 1.5rem;
+    max-width: 680px;
+    width: 100%;
+  }
+ 
+  .crown {
+    font-size: 3rem;
+    margin-bottom: 0.5rem;
+    animation: floatCrown 3s ease-in-out infinite;
+    display: block;
+  }
+ 
+  @keyframes floatCrown {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-10px) rotate(5deg); }
+  }
+ 
+  .title {
+    font-family: 'Playfair Display', serif;
+    color: #f9d4a0;
+    font-size: 3rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-shadow: 0 0 30px rgba(249, 212, 160, 0.5);
+    margin-bottom: 0.3rem;
+  }
+ 
+  .subtitle {
+    font-family: 'Playfair Display', serif;
+    color: #e8a5c8;
+    font-size: 1.1rem;
+    font-style: italic;
+    margin-bottom: 2.5rem;
+    letter-spacing: 1px;
+  }
+ 
+  .animals-scene {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 0;
+    margin: 1.5rem auto;
+    position: relative;
+    height: 200px;
+  }
+ 
+  .cat-wrap {
+    animation: catBob 2.5s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+ 
+  @keyframes catBob {
+    0%, 100% { transform: translateY(0) rotate(-2deg); }
+    50% { transform: translateY(-8px) rotate(2deg); }
+  }
+ 
+  .dog-wrap {
+    animation: dogWag 2s ease-in-out infinite;
+    transform-origin: bottom center;
+    animation-delay: 0.3s;
+  }
+ 
+  @keyframes dogWag {
+    0%, 100% { transform: translateY(0) rotate(2deg); }
+    50% { transform: translateY(-6px) rotate(-2deg); }
+  }
+ 
+  .heart-between {
+    position: absolute;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.8rem;
+    animation: heartBeat 1.2s ease-in-out infinite;
+    z-index: 10;
+  }
+ 
+  @keyframes heartBeat {
+    0%, 100% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.3); }
+  }
+ 
+  .message-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(249, 212, 160, 0.2);
+    border-radius: 20px;
+    padding: 1.8rem 2rem;
+    margin: 1.5rem 0;
+    backdrop-filter: blur(10px);
+  }
+ 
+  .message-text {
+    font-family: 'Playfair Display', serif;
+    color: #f0e6ff;
+    font-size: 1.05rem;
+    line-height: 1.9;
+    font-style: italic;
+  }
+ 
+  .signature {
+    margin-top: 1.2rem;
+    color: #e8a5c8;
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+ 
+  .confetti-container {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+ 
+  .confetti-piece {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    top: -10px;
+    animation: confettiFall var(--dur) linear var(--delay) infinite;
+    border-radius: var(--r);
+  }
+ 
+  @keyframes confettiFall {
+    0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+  }
+ 
+  .paw-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+    opacity: 0.7;
+  }
+</style>
+</head>
+<body>
+ 
+<div class="stars" id="stars"></div>
+<div class="confetti-container" id="confetti"></div>
+ 
+<div class="container">
+  <span class="crown">👑</span>
+  <h1 class="title">My Queen</h1>
+  <p class="subtitle">il tuo giorno speciale è finalmente arrivato</p>
+ 
+  <div class="animals-scene">
+    <span class="heart-between">❤️</span>
+ 
+    <!-- Black Cat SVG -->
+    <div class="cat-wrap">
+      <svg width="110" height="160" viewBox="0 0 110 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="55" cy="115" rx="30" ry="35" fill="#1a1a2e"/>
+        <circle cx="55" cy="68" r="26" fill="#1a1a2e"/>
+        <polygon points="32,50 25,28 42,44" fill="#1a1a2e"/>
+        <polygon points="78,50 85,28 68,44" fill="#1a1a2e"/>
+        <polygon points="34,48 29,34 41,45" fill="#b87fa8"/>
+        <polygon points="76,48 81,34 69,45" fill="#b87fa8"/>
+        <ellipse cx="46" cy="67" rx="6" ry="7" fill="#7dd4a0"/>
+        <ellipse cx="64" cy="67" rx="6" ry="7" fill="#7dd4a0"/>
+        <ellipse cx="46" cy="67" rx="3" ry="6" fill="#111"/>
+        <ellipse cx="64" cy="67" rx="3" ry="6" fill="#111"/>
+        <circle cx="48" cy="65" r="1.5" fill="white"/>
+        <circle cx="66" cy="65" r="1.5" fill="white"/>
+        <polygon points="55,76 52,79 58,79" fill="#e8a5c8"/>
+        <path d="M52 79 Q55 83 58 79" stroke="#555" stroke-width="1" fill="none"/>
+        <line x1="20" y1="74" x2="45" y2="76" stroke="#aaa" stroke-width="1"/>
+        <line x1="20" y1="78" x2="45" y2="78" stroke="#aaa" stroke-width="1"/>
+        <line x1="65" y1="76" x2="90" y2="74" stroke="#aaa" stroke-width="1"/>
+        <line x1="65" y1="78" x2="90" y2="78" stroke="#aaa" stroke-width="1"/>
+        <ellipse cx="38" cy="148" rx="12" ry="8" fill="#1a1a2e"/>
+        <ellipse cx="72" cy="148" rx="12" ry="8" fill="#1a1a2e"/>
+        <path d="M85 130 Q110 100 105 75 Q102 65 95 70" stroke="#1a1a2e" stroke-width="10" fill="none" stroke-linecap="round"/>
+        <rect x="30" y="88" width="50" height="8" rx="4" fill="#8b5cf6"/>
+        <circle cx="55" cy="92" r="4" fill="#f9d4a0"/>
+      </svg>
+    </div>
+ 
+    <!-- Golden Retriever SVG -->
+    <div class="dog-wrap">
+      <svg width="130" height="160" viewBox="0 0 130 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="65" cy="112" rx="38" ry="36" fill="#c8832a"/>
+        <ellipse cx="65" cy="118" rx="24" ry="22" fill="#e8a84f"/>
+        <ellipse cx="65" cy="62" rx="28" ry="26" fill="#c8832a"/>
+        <ellipse cx="65" cy="75" rx="16" ry="12" fill="#e8a84f"/>
+        <ellipse cx="33" cy="65" rx="13" ry="22" fill="#a86520" transform="rotate(-15 33 65)"/>
+        <ellipse cx="97" cy="65" rx="13" ry="22" fill="#a86520" transform="rotate(15 97 65)"/>
+        <circle cx="55" cy="60" r="7" fill="#3b1f0a"/>
+        <circle cx="75" cy="60" r="7" fill="#3b1f0a"/>
+        <circle cx="53" cy="58" r="2.5" fill="white"/>
+        <circle cx="73" cy="58" r="2.5" fill="white"/>
+        <ellipse cx="65" cy="72" rx="7" ry="5" fill="#2a1a0a"/>
+        <ellipse cx="65" cy="83" rx="7" ry="6" fill="#e8617a"/>
+        <line x1="65" y1="78" x2="65" y2="88" stroke="#c04060" stroke-width="1.5"/>
+        <ellipse cx="44" cy="148" rx="14" ry="9" fill="#c8832a"/>
+        <ellipse cx="86" cy="148" rx="14" ry="9" fill="#c8832a"/>
+        <path d="M103 105 Q125 85 120 65 Q117 55 110 60" stroke="#c8832a" stroke-width="12" fill="none" stroke-linecap="round"/>
+        <rect x="38" y="83" width="54" height="8" rx="4" fill="#e8a5c8"/>
+        <circle cx="65" cy="87" r="4" fill="#f9d4a0"/>
+      </svg>
+    </div>
+  </div>
+ 
+  <div class="message-card">
+    <p class="message-text">
+      Oggi è il tuo giorno, e io voglio che tu sappia quanto sei speciale.<br><br>
+      Sei la luce che illumina ogni mia mattina, il sorriso che mi scalda il cuore.<br>
+      Ti amo senza riserve, ogni giorno di più.<br><br>
+      Buon compleanno, mia regina. 🌹
+    </p>
+    <p class="signature">con tutto il mio amore ♡</p>
+  </div>
+ 
+  <div class="paw-row">🐾🐾🐾🐾🐾</div>
+</div>
+ 
+<script>
+  const starsEl = document.getElementById('stars');
+  for (let i = 0; i < 80; i++) {
+    const s = document.createElement('div');
+    s.className = 'star';
+    const size = Math.random() * 2.5 + 0.5;
+    s.style.cssText = `
+      width: ${size}px; height: ${size}px;
+      left: ${Math.random()*100}%;
+      top: ${Math.random()*100}%;
+      --d: ${(Math.random()*3+1).toFixed(1)}s;
+      animation-delay: ${(Math.random()*4).toFixed(1)}s;
+    `;
+    starsEl.appendChild(s);
+  }
+ 
+  const colors = ['#f9d4a0','#e8a5c8','#c8a0f8','#8bd4c0','#f4a0b0'];
+  const confEl = document.getElementById('confetti');
+  for (let i = 0; i < 35; i++) {
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    c.style.cssText = `
+      left: ${Math.random()*100}%;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      --dur: ${(Math.random()*4+4).toFixed(1)}s;
+      --delay: ${(Math.random()*6).toFixed(1)}s;
+      --r: ${Math.random() > 0.5 ? '50%' : '2px'};
+      transform: rotate(${Math.random()*360}deg);
+    `;
+    confEl.appendChild(c);
+  }
+</script>
+</body>
+</html>
